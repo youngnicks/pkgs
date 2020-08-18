@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/malice-plugins/pkgs/database"
 	"github.com/malice-plugins/pkgs/utils"
 	"github.com/olivere/elastic/v7"
 	"github.com/pkg/errors"
+	log "github.com/sirupsen/logrus"
 )
 
 // Database is the elasticsearch malice database object
@@ -279,7 +279,7 @@ func (db *Database) StoreHash(hash string) (elastic.IndexResponse, error) {
 	newScan, err := client.Index().
 		Index(db.Index).
 		Type(db.Type).
-		OpType("create").
+		OpType("index").
 		// Id("1").
 		BodyJson(scan).
 		Do(context.Background())
